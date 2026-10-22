@@ -1,0 +1,1 @@
+TMP_DIR=$(mktemp -d) && git clone --depth 1 https://github.com/overgodofchaos/nftables-install.git "$TMP_DIR" && (cd "$TMP_DIR" && bash ./install.sh) ; rm -rf "$TMP_DIR"
