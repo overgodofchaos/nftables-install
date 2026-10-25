@@ -17,7 +17,7 @@ fi
 
 # Check root
 if [[ $EUID -ne 0 ]]; then
-  echo "Errot: root required" >&2
+  echo "Error: root required" >&2
   exit 1
 fi
 
