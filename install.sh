@@ -50,6 +50,8 @@ fi
 # Install profile
 cp "${SCRIPT_DIR}/nftables.conf" "/etc/nftables.conf"
 chmod u+x "/etc/nftables.conf"
+DEFAULT_INTERFACE=$(ip route get 1.1.1.1 | awk '{for(i=1;i<=NF;i++) if($i=="dev"){print $(i+1); exit}}')
+sed -i "s|__DEFAULT_INTERFACE__|$DEFAULT_INTERFACE|g" /etc/nftables.conf
 
 
 # Finish
@@ -58,4 +60,4 @@ echo "Afailable interfaces:"
 printf '%s\n' /sys/class/net/* | sed 's|.*/||'
 echo "Start:"
 echo "nft -f /etc/nftables.conf && systemctl enable --now nftables && systemctl restart docker.service 2>/dev/null || true"
-echo "Edit /etc/nftables.com before start"
+echo "Check /etc/nftables.com before start"
